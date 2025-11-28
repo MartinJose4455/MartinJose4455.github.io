@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Martin Jose | IT Graduate</title>
+  <meta name="description" content="Resume website of Martin Jose — IT Graduate specializing in web development, cross-platform apps, and data-driven projects." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f172a; /* slate-900 */
+      --card:#111827; /* gray-900 */
+      --text:#e5e7eb; /* gray-200 */
+      --muted:#9ca3af; /* gray-400 */
+      --accent:#38bdf8; /* sky-400 */
+      --chip:#1f2937; /* gray-800 */
+      --link:#93c5fd; /* blue-300 */
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    a{color:var(--link);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:1000px;margin:0 auto;padding:28px}
+    header{display:flex;flex-direction:column;gap:12px;padding:24px;border-radius:16px;background:linear-gradient(135deg, rgba(56,189,248,.15), rgba(147,197,253,.08)), var(--card);border:1px solid rgba(148,163,184,.15)}
+    .top{display:flex;flex-wrap:wrap;align-items:flex-end;gap:14px;justify-content:space-between}
+    h1{font-size:32px;margin:0}
+    .subtitle{color:var(--muted);font-size:16px}
+    .contact{display:flex;flex-wrap:wrap;gap:10px}
+    .chip{background:var(--chip);border:1px solid rgba(148,163,184,.15);padding:8px 12px;border-radius:999px;font-size:14px}
+    nav{margin-top:12px;display:flex;flex-wrap:wrap;gap:10px}
+    nav a{padding:8px 12px;border-radius:8px;background:transparent;border:1px solid rgba(148,163,184,.18)}
+    nav a:hover{background:rgba(56,189,248,.1);border-color:rgba(56,189,248,.3)}
+    section{margin-top:26px;padding:22px;border-radius:16px;background:var(--card);border:1px solid rgba(148,163,184,.15)}
+    section h2{margin:0 0 14px;font-size:20px;border-bottom:1px solid rgba(148,163,184,.15);padding-bottom:8px}
+    .grid{display:grid;grid-template-columns:1fr;gap:14px}
+    @media(min-width:800px){.grid{grid-template-columns:1fr 1fr}}
+    .item{padding:12px;border-radius:12px;border:1px solid rgba(148,163,184,.12);background:#0b1220}
+    .item h3{margin:0 0 6px;font-size:16px}
+    .meta{color:var(--muted);font-size:13px;margin-bottom:8px}
+    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .tag{font-size:12px;padding:6px 10px;border-radius:999px;background:var(--chip);border:1px solid rgba(148,163,184,.15)}
+    .skills{display:flex;flex-wrap:wrap;gap:8px}
+    .list{display:grid;grid-template-columns:1fr;gap:8px}
+    @media(min-width:700px){.list{grid-template-columns:1fr 1fr}}
+    footer{margin:26px 0 40px;color:var(--muted);text-align:center}
+    .btn{display:inline-block;background:var(--accent);color:#06243a;font-weight:700;border-radius:10px;padding:10px 14px;border:none}
+    .btn:hover{opacity:.9}
+    .two-col{display:grid;grid-template-columns:1fr;gap:18px}
+    @media(min-width:900px){.two-col{grid-template-columns:1.3fr .7fr}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="top">
+        <div>
+          <h1>Martin Jose</h1>
+          <div class="subtitle">IT Graduate • Web & Cross‑platform Development • Research & Analysis</div>
+        </div>
+        <div class="contact">
+          <span class="chip">Kottayam, Kerala, India</span>
+          <a class="chip" href="mailto:martinjp4455@gmail.com">martinjp4455@gmail.com</a>
+          <a class="chip" href="tel:+919020954455">+91 9020954455</a>
+          <!-- Add LinkedIn/GitHub if available -->
+        </div>
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#languages">Languages</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section id="about" class="two-col">
+      <div>
+        <h2>Profile summary</h2>
+        <p>
+          Highly motivated IT graduate with a strong passion for technology and continuous learning.
+          Experienced across web and cross‑platform development, with a solid foundation in computer science,
+          programming, and databases. Comfortable with multiple languages and tools, and adaptable in
+          solving complex technical challenges.
+        </p>
+        <div class="tags">
+          <span class="tag">Design Thinking</span>
+          <span class="tag">Cross‑platform</span>
+          <span class="tag">Team Collaboration</span>
+          <span class="tag">Research & Analysis</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <h2>Experience & traineeship</h2>
+      <div class="grid">
+        <div class="item">
+          <h3>Account Assistant — GST Suvidha Kendra</h3>
+          <div class="meta">Apr 2024 – Oct 2024 • Compliance & Records</div>
+          <p>Maintained and organized financial records including GST returns, invoices, and client tax documentation; ensured timely, accurate filing in compliance with Indian tax regulations.</p>
+          <div class="tags">
+            <span class="tag">GST</span><span class="tag">Compliance</span><span class="tag">Documentation</span>
+          </div>
+        </div>
+        <div class="item">
+          <h3>Software Engineer — Claysys Technologies</h3>
+          <div class="meta">2023 • Marketing Operations</div>
+          <p>Developed and executed marketing strategies and campaigns aligned with company goals; monitored brand consistency across channels and materials.</p>
+          <div class="tags">
+            <span class="tag">Strategy</span><span class="tag">Brand</span><span class="tag">Cross‑functional</span>
+          </div>
+        </div>
+        <div class="item">
+          <h3>Flutter App Development Trainee — IEEE IEDC</h3>
+          <div class="meta">2021 • State‑supported bootcamp</div>
+          <p>Completed a bootcamp focused on building cross‑platform mobile applications using Flutter.</p>
+          <div class="tags">
+            <span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">Cross‑platform</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="grid">
+        <div class="item">
+          <h3>Online Insurance Management (Python)</h3>
+          <div class="meta">2022 • Policy & Claims Automation</div>
+          <p>Python‑based platform to automate policy management, claims processing, and customer data handling; improved operational workflows for accuracy and reliability.</p>
+          <div class="tags">
+            <span class="tag">Python</span><span class="tag">Workflows</span><span class="tag">Data handling</span>
+          </div>
+        </div>
+        <div class="item">
+          <h3>Pharmacy Management System (Python)</h3>
+          <div class="meta">2022 • Inventory & Sales</div>
+          <p>Application for inventory tracking, order processing, and sales documentation; increased efficiency in daily pharmacy operations.</p>
+          <div class="tags">
+            <span class="tag">Python</span><span class="tag">Inventory</span><span class="tag">Automation</span>
+          </div>
+        </div>
+        <div class="item">
+          <h3>Online Resume Builder (.NET Framework)</h3>
+          <div class="meta">2023 • Templates & Export</div>
+          <p>Web app guiding users through structured resume creation with customizable templates and polished output.</p>
+          <div class="tags">
+            <span class="tag">.NET</span><span class="tag">Web</span><span class="tag">UX</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="two-col">
+      <div>
+        <h2>Technical skills</h2>
+        <div class="list">
+          <div class="item">
+            <h3>Programming</h3>
+            <p>Python, C, C++, Java, C#, R</p>
+          </div>
+          <div class="item">
+            <h3>Web development</h3>
+            <p>HTML, CSS, JavaScript, .NET Framework, React</p>
+          </div>
+          <div class="item">
+            <h3>Database</h3>
+            <p>MySQL, SQL Server</p>
+          </div>
+          <div class="item">
+            <h3>UI/UX</h3>
+            <p>UI/UX Principles, Usability Testing</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2>Core skills</h2>
+        <div class="skills">
+          <span class="tag">Adaptability</span>
+          <span class="tag">Attention to Detail</span>
+          <span class="tag">Critical Thinking</span>
+          <span class="tag">Team Collaboration</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <h2>Education</h2>
+      <div class="grid">
+        <div class="item">
+          <h3>B.Sc Computer Application (Triple Main)</h3>
+          <div class="meta">Mahatma Gandhi University • 2020 – 2023</div>
+          <p>Specializations: Computer Application, Mathematics, and Statistics.</p>
+        </div>
+        <div class="item">
+          <h3>Higher Secondary — Computer Science</h3>
+          <div class="meta">Holy Cross HSS Cherpunkal • 2018 – 2020</div>
+          <p>Focus on foundational CS and programming.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="certifications" class="two-col">
+      <div>
+        <h2>Certifications</h2>
+        <ul>
+          <li>GDG DevFest India — 2021</li>
+          <li>IEEE Ignite Imagination & Inspire Iconic Innovation — 2021</li>
+          <li>Web Designing coursework — 2021–2022</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Languages</h2>
+        <ul>
+          <li>English, German, Malayalam, Hindi</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="languages">
+      <h2>Language proficiency</h2>
+      <div class="tags">
+        <span class="tag">English</span>
+        <span class="tag">German</span>
+        <span class="tag">Malayalam</span>
+        <span class="tag">Hindi</span>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:martinjp4455@gmail.com">martinjp4455@gmail.com</a></p>
+      <p>Phone: <a href="tel:+919020954455">+91 9020954455</a></p>
+      <p>Location: Kottayam, Kerala, India</p>
+      <!-- Optional contact form (requires backend or form service) -->
+    </section>
+
+    <footer>
+      © <span id="year"></span> Martin Jose. All rights reserved.
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
