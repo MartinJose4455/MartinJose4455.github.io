@@ -28,10 +28,11 @@
     h1{font-size:32px;margin:0}
     .subtitle{color:var(--muted);font-size:16px}
     .contact{display:flex;flex-wrap:wrap;gap:10px}
-    .chip{background:var(--chip);border:1px solid rgba(148,163,184,.15);padding:8px 12px;border-radius:999px;font-size:14px}
+    .chip{background:var(--chip);border:1px solid rgba(148,163,184,.15);padding:8px 12px;border-radius:999px;font-size:14px;transition:all 0.3s ease}
+    a.chip:hover{background:rgba(56,189,248,.1);border-color:rgba(56,189,248,.4);transform:translateY(-2px);box-shadow:0 6px 16px rgba(56,189,248,.15);color:var(--accent);text-decoration:none}
     nav{margin-top:12px;display:flex;flex-wrap:wrap;gap:10px}
-    nav a{padding:8px 12px;border-radius:8px;background:transparent;border:1px solid rgba(148,163,184,.18)}
-    nav a:hover{background:rgba(56,189,248,.1);border-color:rgba(56,189,248,.3)}
+    nav a{padding:8px 12px;border-radius:8px;background:transparent;border:1px solid rgba(148,163,184,.18);transition:all 0.3s ease;font-weight:500}
+    nav a:hover{background:rgba(56,189,248,.15);border-color:rgba(56,189,248,.5);transform:translateY(-2px);box-shadow:0 6px 16px rgba(56,189,248,.15);color:var(--accent);text-decoration:none}
     section{margin-top:26px;padding:22px;border-radius:16px;background:var(--card);border:1px solid rgba(148,163,184,.15)}
     section h2{margin:0 0 14px;font-size:20px;border-bottom:1px solid rgba(148,163,184,.15);padding-bottom:8px}
     .grid{display:grid;grid-template-columns:1fr;gap:14px}
@@ -49,9 +50,105 @@
     .btn:hover{opacity:.9}
     .two-col{display:grid;grid-template-columns:1fr;gap:18px}
     @media(min-width:900px){.two-col{grid-template-columns:1.3fr .7fr}}
+    
+    /* Cinematic Focus Effect */
+    body { overflow-x: hidden; }
+    header, section, .item { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; }
+    header:hover, section:hover { transform: scale(1.02); z-index: 5; box-shadow: 0 15px 35px rgba(0,0,0,0.4); border-color: rgba(148,163,184,.3); }
+    .item:hover { transform: scale(1.05); z-index: 10; box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.4); }
+    
+    /* Blur un-hovered sections and header */
+    body:has(header:hover) section { filter: blur(1.5px); opacity: 0.85; transform: scale(0.98); }
+    body:has(section:hover) header, body:has(section:hover) section:not(:hover) { filter: blur(1.5px); opacity: 0.85; transform: scale(0.98); }
+    
+    /* Blur un-hovered items inside the same section */
+    body:has(.item:hover) .item:not(:hover) { filter: blur(1px); opacity: 0.85; transform: scale(0.95); }
+    
+    /* Mobile Compact Layout */
+    @media (max-width: 600px) {
+      .container { padding: 12px; }
+      header { padding: 16px; align-items: center; text-align: center; }
+      .top { justify-content: center; }
+      .contact { justify-content: center; }
+      nav { justify-content: center; }
+      section { padding: 16px; margin-top: 16px; }
+      h1 { font-size: 26px; }
+      .chip { font-size: 13px; padding: 6px 10px; }
+      nav a { padding: 6px 10px; font-size: 14px; }
+    }
+
+    /* Abstract Rotating Diamonds Background */
+    .bg-diamonds {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      overflow: hidden;
+      z-index: -1;
+      pointer-events: none;
+    }
+    .diamond {
+      position: absolute;
+      display: block;
+      background: rgba(56, 189, 248, 0.05);
+      animation: floatUp 25s linear infinite;
+      bottom: -150px;
+      border: 1px solid rgba(56, 189, 248, 0.1);
+      border-radius: 8px;
+    }
+    .diamond:nth-child(1) { left: 15%; width: 80px; height: 80px; animation-delay: 0s; }
+    .diamond:nth-child(2) { left: 45%; width: 40px; height: 40px; animation-delay: 4s; animation-duration: 15s; }
+    .diamond:nth-child(3) { left: 85%; width: 120px; height: 120px; animation-delay: 2s; animation-duration: 30s; }
+    .diamond:nth-child(4) { left: 25%; width: 60px; height: 60px; animation-delay: 8s; animation-duration: 20s; }
+    .diamond:nth-child(5) { left: 70%; width: 50px; height: 50px; animation-delay: 0s; animation-duration: 18s; }
+    .diamond:nth-child(6) { left: 55%; width: 90px; height: 90px; animation-delay: 11s; animation-duration: 28s; }
+    .diamond:nth-child(7) { left: 5%; width: 30px; height: 30px; animation-delay: 6s; animation-duration: 12s; }
+    .diamond:nth-child(8) { left: 90%; width: 70px; height: 70px; animation-delay: 15s; animation-duration: 22s; }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% {
+        transform: translateY(-120vh) rotate(405deg);
+        opacity: 0;
+      }
+    }
+
+    /* Scrolling Image Background */
+    .bg-image-scrolling {
+      position: fixed;
+      top: 0; left: 0;
+      width: 120vw; height: 120vh;
+      z-index: -2;
+      pointer-events: none;
+      background-image: url('file:///C:/Users/Martin/.gemini/antigravity/brain/b78e5f3e-42a4-401a-941f-049d8edabee3/dark_tech_bg_1775832255050.png');
+      background-size: cover;
+      background-position: center;
+      animation: panImage 60s alternate linear infinite;
+      opacity: 0.12; 
+    }
+
+    @keyframes panImage {
+      0% { transform: translate(0, 0) scale(1.1); }
+      100% { transform: translate(-5%, -5%) scale(1.2); }
+    }
   </style>
 </head>
 <body>
+  <div class="bg-image-scrolling"></div>
+  <div class="bg-diamonds">
+    <div class="diamond"></div>
+    <div class="diamond"></div>
+    <div class="diamond"></div>
+    <div class="diamond"></div>
+    <div class="diamond"></div>
+    <div class="diamond"></div>
+    <div class="diamond"></div>
+    <div class="diamond"></div>
+  </div>
   <div class="container">
     <header>
       <div class="top">
@@ -78,21 +175,19 @@
       </nav>
     </header>
 
-    <section id="about" class="two-col">
-      <div>
-        <h2>Profile summary</h2>
-        <p>
-          Highly motivated IT graduate with a strong passion for technology and continuous learning.
-          Experienced across web and cross‑platform development, with a solid foundation in computer science,
-          programming, and databases. Comfortable with multiple languages and tools, and adaptable in
-          solving complex technical challenges.
-        </p>
-        <div class="tags">
-          <span class="tag">Design Thinking</span>
-          <span class="tag">Cross‑platform</span>
-          <span class="tag">Team Collaboration</span>
-          <span class="tag">Research & Analysis</span>
-        </div>
+    <section id="about">
+      <h2>Profile summary</h2>
+      <p>
+        Highly motivated <strong>IT graduate</strong> with a strong passion for technology and continuous learning.
+        Experienced across <strong>web and cross‑platform development</strong>, with a solid foundation in <strong>computer science</strong>,
+        <strong>programming</strong>, and <strong>databases</strong>. Comfortable with <strong>multiple languages and tools</strong>, and adaptable in
+        solving <strong>complex technical challenges</strong>.
+      </p>
+      <div class="tags">
+        <span class="tag">Design Thinking</span>
+        <span class="tag">Cross‑platform</span>
+        <span class="tag">Team Collaboration</span>
+        <span class="tag">Research & Analysis</span>
       </div>
     </section>
 
@@ -102,7 +197,7 @@
         <div class="item">
           <h3>Account Assistant — GST Suvidha Kendra</h3>
           <div class="meta">Apr 2024 – Oct 2024 • Compliance & Records</div>
-          <p>Maintained and organized financial records including GST returns, invoices, and client tax documentation; ensured timely, accurate filing in compliance with Indian tax regulations.</p>
+          <p>Maintained and organized financial records including <strong>GST returns</strong>, <strong>invoices</strong>, and client <strong>tax documentation</strong>; ensured timely, accurate filing in compliance with <strong>Indian tax regulations</strong>.</p>
           <div class="tags">
             <span class="tag">GST</span><span class="tag">Compliance</span><span class="tag">Documentation</span>
           </div>
@@ -110,7 +205,7 @@
         <div class="item">
           <h3>Software Engineer — Claysys Technologies</h3>
           <div class="meta">2023 • Marketing Operations</div>
-          <p>Developed and executed marketing strategies and campaigns aligned with company goals; monitored brand consistency across channels and materials.</p>
+          <p>Developed and executed <strong>marketing strategies</strong> and campaigns aligned with company goals; monitored <strong>brand consistency</strong> across channels and materials.</p>
           <div class="tags">
             <span class="tag">Strategy</span><span class="tag">Brand</span><span class="tag">Cross‑functional</span>
           </div>
@@ -118,7 +213,7 @@
         <div class="item">
           <h3>Flutter App Development Trainee — IEEE IEDC</h3>
           <div class="meta">2021 • State‑supported bootcamp</div>
-          <p>Completed a bootcamp focused on building cross‑platform mobile applications using Flutter.</p>
+          <p>Completed a bootcamp focused on building <strong>cross‑platform mobile applications</strong> using <strong>Flutter</strong>.</p>
           <div class="tags">
             <span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">Cross‑platform</span>
           </div>
@@ -132,7 +227,7 @@
         <div class="item">
           <h3>Online Insurance Management (Python)</h3>
           <div class="meta">2022 • Policy & Claims Automation</div>
-          <p>Python‑based platform to automate policy management, claims processing, and customer data handling; improved operational workflows for accuracy and reliability.</p>
+          <p><strong>Python‑based platform</strong> to automate <strong>policy management</strong>, <strong>claims processing</strong>, and customer <strong>data handling</strong>; improved operational workflows for <strong>accuracy and reliability</strong>.</p>
           <div class="tags">
             <span class="tag">Python</span><span class="tag">Workflows</span><span class="tag">Data handling</span>
           </div>
@@ -140,7 +235,7 @@
         <div class="item">
           <h3>Pharmacy Management System (Python)</h3>
           <div class="meta">2022 • Inventory & Sales</div>
-          <p>Application for inventory tracking, order processing, and sales documentation; increased efficiency in daily pharmacy operations.</p>
+          <p>Application for <strong>inventory tracking</strong>, <strong>order processing</strong>, and <strong>sales documentation</strong>; increased <strong>efficiency</strong> in daily pharmacy operations.</p>
           <div class="tags">
             <span class="tag">Python</span><span class="tag">Inventory</span><span class="tag">Automation</span>
           </div>
@@ -148,7 +243,7 @@
         <div class="item">
           <h3>Online Resume Builder (.NET Framework)</h3>
           <div class="meta">2023 • Templates & Export</div>
-          <p>Web app guiding users through structured resume creation with customizable templates and polished output.</p>
+          <p><strong>Web app</strong> guiding users through <strong>structured resume creation</strong> with <strong>customizable templates</strong> and polished output.</p>
           <div class="tags">
             <span class="tag">.NET</span><span class="tag">Web</span><span class="tag">UX</span>
           </div>
@@ -205,30 +300,26 @@
       </div>
     </section>
 
-    <section id="certifications" class="two-col">
-      <div>
-        <h2>Certifications</h2>
-        <ul>
-          <li>GDG DevFest India — 2021</li>
-          <li>IEEE Ignite Imagination & Inspire Iconic Innovation — 2021</li>
-          <li>Web Designing coursework — 2021–2022</li>
-        </ul>
-      </div>
-      <div>
-        <h2>Languages</h2>
-        <ul>
-          <li>English, German, Malayalam, Hindi</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="languages">
-      <h2>Language proficiency</h2>
-      <div class="tags">
-        <span class="tag">English</span>
-        <span class="tag">German</span>
-        <span class="tag">Malayalam</span>
-        <span class="tag">Hindi</span>
+    <section id="certifications">
+      <h2>Certifications & Languages</h2>
+      <div class="grid">
+        <div class="item">
+          <h3>Certifications</h3>
+          <ul>
+            <li>GDG DevFest India — 2021</li>
+            <li>IEEE Ignite Imagination & Inspire Iconic Innovation — 2021</li>
+            <li>Web Designing coursework — 2021–2022</li>
+          </ul>
+        </div>
+        <div class="item">
+          <h3>Languages</h3>
+          <div class="tags">
+            <span class="tag">English</span>
+            <span class="tag">German</span>
+            <span class="tag">Malayalam</span>
+            <span class="tag">Hindi</span>
+          </div>
+        </div>
       </div>
     </section>
 
