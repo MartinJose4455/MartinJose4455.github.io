@@ -135,9 +135,43 @@
       0% { transform: translate(0, 0) scale(1.1); }
       100% { transform: translate(-5%, -5%) scale(1.2); }
     }
+
+    /* Custom Cursor Styles */
+    @media (min-width: 601px) {
+      * { cursor: none !important; }
+    }
+    .custom-cursor {
+      position: fixed;
+      top: 0; left: 0;
+      width: 24px; height: 40px;
+      pointer-events: none;
+      z-index: 99999;
+      will-change: transform;
+      display: none;
+    }
+    .custom-cursor svg {
+      transition: all 0.2s ease;
+      filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.5));
+    }
+    .custom-cursor.hovering svg {
+      transform: scale(1.4);
+      filter: drop-shadow(0 0 18px rgba(129, 140, 248, 1));
+    }
   </style>
 </head>
 <body>
+  <div class="custom-cursor" id="custom-cursor">
+    <svg width="24" height="40" viewBox="0 0 24 40" xmlns="http://www.w3.org/2000/svg">
+      <rect x="4" y="2" width="16" height="36" rx="6" fill="#38bdf8" />
+      <rect x="6" y="12" width="12" height="14" rx="3" fill="#0f172a" />
+      <rect x="1" y="6" width="3" height="6" rx="1" fill="#1e293b" />
+      <rect x="20" y="6" width="3" height="6" rx="1" fill="#1e293b" />
+      <rect x="1" y="26" width="3" height="6" rx="1" fill="#1e293b" />
+      <rect x="20" y="26" width="3" height="6" rx="1" fill="#1e293b" />
+      <circle cx="7" cy="4" r="1.5" fill="#fff" />
+      <circle cx="17" cy="4" r="1.5" fill="#fff" />
+    </svg>
+  </div>
   <div class="bg-image-scrolling"></div>
   <div class="bg-diamonds">
     <div class="diamond"></div>
@@ -338,6 +372,56 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Dynamic Car Cursor Logic
+    const cursorCar = document.getElementById('custom-cursor');
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let currentX = mouseX;
+    let currentY = mouseY;
+    let angle = 0;
+    let cursorVisible = false;
+
+    // Only apply custom cursor on non-touch devices
+    if(window.innerWidth > 600) {
+      document.addEventListener('mousemove', (e) => {
+        if (!cursorVisible) {
+          cursorCar.style.display = 'block';
+          currentX = e.clientX;
+          currentY = e.clientY;
+          cursorVisible = true;
+        }
+        
+        const dx = e.clientX - currentX;
+        const dy = e.clientY - currentY;
+        
+        // Calculate angle if there's enough movement
+        if (Math.abs(dx) > 0.5 || Math.abs(dy) > 0.5) {
+          angle = Math.atan2(dy, dx) * 180 / Math.PI;
+        }
+
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      // Interactive hover feedback
+      const interactables = document.querySelectorAll('a, .btn, .item, .chip');
+      interactables.forEach(el => {
+        el.addEventListener('mouseenter', () => cursorCar.classList.add('hovering'));
+        el.addEventListener('mouseleave', () => cursorCar.classList.remove('hovering'));
+      });
+
+      function animateCursor() {
+        currentX += (mouseX - currentX) * 0.15;
+        currentY += (mouseY - currentY) * 0.15;
+        
+        const rotation = angle + 90;
+        cursorCar.style.transform = `translate(calc(${currentX}px - 12px), calc(${currentY}px - 2px)) rotate(${rotation}deg)`;
+        
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+    }
   </script>
 </body>
 </html>
