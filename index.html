@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,30 +20,67 @@
       --accent-glow: rgba(56, 189, 248, 0.5);
       --accent2: #818cf8;
     }
-    * { box-sizing: border-box; }
-    @media (min-width: 601px) {
-      * { cursor: none !important; }
+
+    body.theme-alt {
+      --bg: #f8fafc;
+      --glass-bg: rgba(255, 255, 255, 0.65);
+      --glass-border: rgba(0, 0, 0, 0.1);
+      --text: #0f172a;
+      --text-muted: #475569;
     }
+
+    .glitch {
+      animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both alternate !important;
+      filter: drop-shadow(4px 0 0 rgba(255,0,0,0.8)) drop-shadow(-4px 0 0 rgba(0,255,255,0.8));
+    }
+
+    @keyframes glitch-skew {
+      0% { transform: skew(0deg); }
+      20% { transform: skew(-15deg); }
+      40% { transform: skew(15deg); }
+      60% { transform: skew(-5deg); }
+      80% { transform: skew(5deg); }
+      100% { transform: skew(0deg); }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    @media (min-width: 601px) {
+      * {
+        cursor: none !important;
+      }
+    }
+
     .custom-cursor {
       position: fixed;
-      top: 0; left: 0;
-      width: 24px; height: 40px;
+      top: 0;
+      left: 0;
+      width: 24px;
+      height: 40px;
       pointer-events: none;
       z-index: 99999;
       will-change: transform;
       display: none;
     }
+
     .custom-cursor svg {
       transition: all 0.2s ease;
       filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.5));
     }
+
     .custom-cursor.hovering svg {
       transform: scale(1.4);
       filter: drop-shadow(0 0 18px rgba(129, 140, 248, 1));
     }
-    body, html {
-      margin: 0; padding: 0;
-      width: 100%; height: 100vh;
+
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100vh;
       font-family: 'Outfit', sans-serif;
       background-color: var(--bg);
       color: var(--text);
@@ -55,18 +93,26 @@
     /* Ambient animated mesh background */
     .bg-animation {
       position: absolute;
-      top: -50%; left: -50%;
-      width: 200%; height: 200%;
-      background: 
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background:
         radial-gradient(circle at 40% 60%, rgba(56, 189, 248, 0.12) 0%, transparent 40%),
         radial-gradient(circle at 80% 30%, rgba(129, 140, 248, 0.12) 0%, transparent 40%);
       animation: rotateBg 40s linear infinite;
       z-index: 0;
       pointer-events: none;
     }
+
     @keyframes rotateBg {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
     .card-container {
@@ -80,7 +126,56 @@
     }
 
     @keyframes floatIn {
-      100% { opacity: 1; transform: translateY(0); }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInOp {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUpH1 {
+      0% {
+        opacity: 0;
+        transform: translateY(30px) translateZ(60px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0) translateZ(60px);
+      }
+    }
+
+    @keyframes slideUpH2 {
+      0% {
+        opacity: 0;
+        transform: translateY(20px) translateZ(50px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0) translateZ(50px);
+      }
+    }
+
+    @keyframes slideUpBtn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px) translateZ(70px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0) translateZ(70px);
+      }
     }
 
     .glass-card {
@@ -92,14 +187,14 @@
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border: 1px solid var(--glass-border);
-      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255,255,255,0.1);
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), 0 20px 40px rgba(0, 0, 0, 0.4), 0 10px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
       text-align: center;
       transform-style: preserve-3d;
       transition: transform 0.1s ease-out;
     }
 
     /* Elements inside the card reacting in 3D space */
-    .glass-card > * {
+    .glass-card>* {
       transform: translateZ(30px);
     }
 
@@ -110,14 +205,25 @@
       border-radius: 50%;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       padding: 3px;
-      animation: pulse 3s infinite;
-      transform: translateZ(50px);
+      transform: translateZ(80px);
+      opacity: 0;
+      animation: fadeInOp 0.8s ease forwards 0.4s, pulse 3s infinite 1.2s;
     }
+
     @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 var(--accent-glow); }
-      70% { box-shadow: 0 0 0 20px rgba(56, 189, 248, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+      0% {
+        box-shadow: 0 0 0 0 var(--accent-glow);
+      }
+
+      70% {
+        box-shadow: 0 0 0 20px rgba(56, 189, 248, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
+      }
     }
+
     .avatar-inner {
       width: 100%;
       height: 100%;
@@ -134,8 +240,11 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       letter-spacing: -1px;
-      transform: translateZ(40px);
+      transform: translateZ(60px);
+      opacity: 0;
+      animation: slideUpH1 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.6s;
     }
+
     h2 {
       font-size: 18px;
       font-weight: 600;
@@ -143,8 +252,11 @@
       margin: 0 0 24px;
       letter-spacing: 3px;
       text-transform: uppercase;
-      transform: translateZ(35px);
+      transform: translateZ(50px);
+      opacity: 0;
+      animation: slideUpH2 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.8s;
     }
+
     p {
       font-size: 17px;
       line-height: 1.7;
@@ -154,7 +266,9 @@
       margin-left: auto;
       margin-right: auto;
       font-weight: 300;
-      transform: translateZ(25px);
+      transform: translateZ(35px);
+      opacity: 0;
+      animation: fadeInOp 0.8s ease forwards 1s;
     }
 
     .btn-container {
@@ -162,7 +276,9 @@
       gap: 16px;
       justify-content: center;
       flex-wrap: wrap;
-      transform: translateZ(45px);
+      transform: translateZ(70px);
+      opacity: 0;
+      animation: slideUpBtn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 1.2s;
     }
 
     .btn {
@@ -179,57 +295,88 @@
       justify-content: center;
       letter-spacing: 0.5px;
     }
+
     .btn-primary {
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       color: #050505;
       box-shadow: 0 10px 25px rgba(56, 189, 248, 0.3);
     }
+
     .btn-primary:after {
       content: '';
       position: absolute;
-      top: 0; left: -100%; width: 50%; height: 100%;
-      background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
       transform: skewX(-20deg);
       transition: left 0.6s;
     }
+
     .btn-primary:hover:after {
       left: 150%;
     }
+
     .btn-primary:hover {
       transform: translateY(-4px) scale(1.03);
       box-shadow: 0 20px 35px rgba(56, 189, 248, 0.45);
     }
-    
+
     .btn-secondary {
       background: rgba(255, 255, 255, 0.05);
       color: var(--text);
       border: 1px solid rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(10px);
     }
+
     .btn-secondary:hover {
       background: rgba(255, 255, 255, 0.1);
       transform: translateY(-4px) scale(1.03);
       border-color: rgba(255, 255, 255, 0.3);
-      box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
     }
 
     /* Floating particles */
     .particles {
       position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      z-index: 1; pointer-events: none;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: none;
     }
-    
+
     @media (max-width: 600px) {
-      .glass-card { padding: 40px 20px; }
-      h1 { font-size: 36px; }
-      p { font-size: 15px; }
-      .btn { width: 100%; }
-      .card-container { perspective: none; }
-      .glass-card { transform: none !important; transition: none !important; }
+      .glass-card {
+        padding: 40px 20px;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+
+      p {
+        font-size: 15px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .card-container {
+        perspective: none;
+      }
+
+      .glass-card {
+        transform: none !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
+
 <body>
   <div class="custom-cursor" id="custom-cursor">
     <svg width="24" height="40" viewBox="0 0 24 40" xmlns="http://www.w3.org/2000/svg">
@@ -249,7 +396,7 @@
   </div>
   <div class="bg-animation"></div>
   <div class="particles" id="particles"></div>
-  
+
   <div class="card-container">
     <div class="glass-card">
       <div class="avatar">
@@ -258,29 +405,45 @@
       <h1>Martin Jose</h1>
       <h2>IT Graduate & Developer</h2>
       <p>
-        Bridging the gap between conceptual design and robust engineering. 
+        Bridging the gap between conceptual design and robust engineering.
         Passionate about crafting dynamic web experiences and building scalable cross-platform solutions.
       </p>
       <div class="btn-container">
-        <a href="portfolio.html" class="btn btn-primary">Discover My Work</a>
+        <a href="index.html" class="btn btn-primary">Discover Profile</a>
         <a href="mailto:martinjp4455@gmail.com" class="btn btn-secondary">Get In Touch</a>
       </div>
     </div>
+  </div>
+
+  <div id="secret-message" style="position: absolute; bottom: 20px; right: 20px; opacity: 0; transition: opacity 0.5s; pointer-events: none; color: var(--accent); font-size: 14px; font-weight: 800; letter-spacing: 2px;">
+    SYSTEM UNLOCKED
   </div>
 
   <script>
     // 3D Glass Card effect
     const card = document.querySelector('.glass-card');
     const container = document.querySelector('.card-container');
-    
+
     // Disable on mobile/touch devices for better UX
-    if(window.innerWidth > 600) {
+    if (window.innerWidth > 600) {
+      const bgAnim = document.querySelector('.bg-animation');
+      const particleCont = document.querySelector('.particles');
+
       document.addEventListener('mousemove', (e) => {
         const xAxis = (window.innerWidth / 2 - e.pageX) / 30;
         const yAxis = (window.innerHeight / 2 - e.pageY) / 30;
         card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        
+        if(bgAnim) {
+          bgAnim.style.marginLeft = `${xAxis * -10}px`;
+          bgAnim.style.marginTop = `${yAxis * -10}px`;
+        }
+        if(particleCont) {
+          particleCont.style.marginLeft = `${xAxis * -25}px`;
+          particleCont.style.marginTop = `${yAxis * -25}px`;
+        }
       });
-      
+
       document.addEventListener('mouseenter', () => {
         card.style.transition = 'none';
       });
@@ -293,7 +456,7 @@
 
     // Generate ambient floating particles
     const particleContainer = document.getElementById('particles');
-    for(let i=0; i<35; i++) {
+    for (let i = 0; i < 35; i++) {
       let p = document.createElement('div');
       p.style.position = 'absolute';
       const size = Math.random() * 3 + 1;
@@ -303,7 +466,7 @@
       p.style.borderRadius = '50%';
       p.style.left = Math.random() * 100 + 'vw';
       p.style.top = Math.random() * 100 + 'vh';
-      
+
       const duration = Math.random() * 3 + 3;
       p.style.animation = `floatUp ${duration}s ease-in-out infinite alternate`;
       p.style.animationDelay = `${Math.random() * duration}s`;
@@ -330,7 +493,7 @@
     let cursorVisible = false;
 
     // Only apply custom cursor on non-touch devices
-    if(window.innerWidth > 600) {
+    if (window.innerWidth > 600) {
       document.addEventListener('mousemove', (e) => {
         if (!cursorVisible) {
           cursorCar.style.display = 'block';
@@ -338,10 +501,10 @@
           currentY = e.clientY;
           cursorVisible = true;
         }
-        
+
         const dx = e.clientX - currentX;
         const dy = e.clientY - currentY;
-        
+
         // Calculate angle if there's enough movement
         if (Math.abs(dx) > 0.5 || Math.abs(dy) > 0.5) {
           angle = Math.atan2(dy, dx) * 180 / Math.PI;
@@ -362,17 +525,102 @@
         // Smooth interpolation for following speed
         currentX += (mouseX - currentX) * 0.15;
         currentY += (mouseY - currentY) * 0.15;
-        
+
         // SVG faces UP intrinsically (-90 degrees), add 90 to match atan2 vector
         const rotation = angle + 90;
-        
+
         // Center offset so tip of car is accurate to cursor pointer
         cursorCar.style.transform = `translate(calc(${currentX}px - 12px), calc(${currentY}px - 2px)) rotate(${rotation}deg)`;
-        
+
         requestAnimationFrame(animateCursor);
       }
       animateCursor();
     }
+
+    // Easter Eggs
+    console.log("%c👀 You found the secret! Press 'M' or Double Click for surprises.", "color: #38bdf8; font-size: 16px; font-weight: bold;");
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key.toLowerCase() === 'm') {
+        document.body.classList.toggle('theme-alt');
+        const secret = document.getElementById('secret-message');
+        if(secret) {
+          secret.innerHTML = document.body.classList.contains('theme-alt') ? "LIGHT THEME UNLOCKED" : "DARK THEME RESTORED";
+          secret.style.opacity = '1';
+          setTimeout(() => secret.style.opacity = '0', 3000);
+        }
+      }
+    });
+
+    document.addEventListener('dblclick', () => {
+      if (card) {
+        card.classList.add('glitch');
+        setTimeout(() => card.classList.remove('glitch'), 400);
+      }
+      const secret = document.getElementById('secret-message');
+      if(secret) {
+        secret.innerHTML = "GLITCH IN THE MATRIX";
+        secret.style.opacity = '1';
+        setTimeout(() => secret.style.opacity = '0', 3000);
+      }
+    });
+
+    // --- UI Sound Effects (Web Audio Synthesizer) ---
+    let audioCtx;
+    function playSound(type) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContext) return;
+      if (!audioCtx) audioCtx = new AudioContext();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      
+      const oscillator = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      
+      if (type === 'hover') {
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(500, audioCtx.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.05);
+        gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+        oscillator.start(audioCtx.currentTime);
+        oscillator.stop(audioCtx.currentTime + 0.1);
+      } else if (type === 'click') {
+        oscillator.type = 'triangle';
+        oscillator.frequency.setValueAtTime(400, audioCtx.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 0.15);
+        gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+        oscillator.start(audioCtx.currentTime);
+        oscillator.stop(audioCtx.currentTime + 0.15);
+      }
+    }
+
+    const soundButtons = document.querySelectorAll('.btn');
+    soundButtons.forEach(btn => {
+      btn.addEventListener('mouseenter', () => playSound('hover'));
+      btn.addEventListener('click', () => playSound('click'));
+    });
+
+    // --- Global Color Shifting ---
+    let colorHue = 200;
+    function shiftGlobalColors() {
+      colorHue = (colorHue + 0.1) % 360;
+      
+      const isAlt = document.body.classList.contains('theme-alt');
+      const saturation = isAlt ? 95 : 90;
+      const lightness = isAlt ? 55 : 60;
+      
+      document.body.style.setProperty('--accent', `hsl(${colorHue}, ${saturation}%, ${lightness}%)`);
+      document.body.style.setProperty('--accent-glow', `hsla(${colorHue}, ${saturation}%, ${lightness}%, 0.5)`);
+      document.body.style.setProperty('--accent2', `hsl(${(colorHue + 40) % 360}, ${saturation}%, ${lightness + 5}%)`);
+      
+      requestAnimationFrame(shiftGlobalColors);
+    }
+    shiftGlobalColors();
   </script>
 </body>
+
 </html>
