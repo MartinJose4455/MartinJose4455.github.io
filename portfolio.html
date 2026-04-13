@@ -57,12 +57,12 @@
     header:hover, section:hover { transform: scale(1.02); z-index: 5; box-shadow: 0 15px 35px rgba(0,0,0,0.4); border-color: rgba(148,163,184,.3); }
     .item:hover { transform: scale(1.05); z-index: 10; box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.4); }
     
-    /* Blur un-hovered sections and header */
-    body:has(header:hover) section { filter: blur(1.5px); opacity: 0.85; transform: scale(0.98); }
-    body:has(section:hover) header, body:has(section:hover) section:not(:hover) { filter: blur(1.5px); opacity: 0.85; transform: scale(0.98); }
+    /* Dim un-hovered sections and header (blur removed) */
+    body:has(header:hover) section { opacity: 0.85; transform: scale(0.98); }
+    body:has(section:hover) header, body:has(section:hover) section:not(:hover) { opacity: 0.85; transform: scale(0.98); }
     
-    /* Blur un-hovered items inside the same section */
-    body:has(.item:hover) .item:not(:hover) { filter: blur(1px); opacity: 0.85; transform: scale(0.95); }
+    /* Dim un-hovered items inside the same section (blur removed) */
+    body:has(.item:hover) .item:not(:hover) { opacity: 0.85; transform: scale(0.95); }
     
     /* Mobile Compact Layout */
     @media (max-width: 600px) {
@@ -157,6 +157,22 @@
       transform: scale(1.4);
       filter: drop-shadow(0 0 18px rgba(129, 140, 248, 1));
     }
+
+    /* Mini Interactive Apps */
+    .app-widget { margin-top: 12px; background: rgba(15,23,42,0.6); padding: 12px; border-radius: 8px; border: 1px solid rgba(148,163,184,0.1); }
+    .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 10px; }
+    .calc-btn { background: var(--chip); color: var(--text); border: 1px solid rgba(148,163,184,0.1); border-radius: 6px; padding: 10px; cursor: pointer; font-weight: 600; text-align: center; transition: 0.2s; }
+    .calc-btn:hover { background: rgba(56,189,248,.15); color: var(--accent); }
+    .calc-screen { width: 100%; background: #0b1220; border: 1px solid rgba(148,163,184,0.2); border-radius: 6px; padding: 10px; color: var(--accent); font-size: 18px; text-align: right; margin-bottom: 6px; outline: none; }
+    
+    .todo-input, .weather-input { width: 100%; background: #0b1220; border: 1px solid rgba(148,163,184,0.2); border-radius: 6px; padding: 8px 10px; color: var(--text); margin-bottom: 8px; outline: none; transition: 0.2s; }
+    .todo-input:focus, .weather-input:focus { border-color: rgba(56,189,248,.6); }
+    .todo-list { list-style: none; padding: 0; margin: 0; max-height: 150px; overflow-y: auto; }
+    .todo-item { display: flex; justify-content: space-between; align-items: center; background: #0b1220; padding: 6px 10px; border-radius: 6px; margin-bottom: 6px; font-size: 13px; }
+    .todo-delete { color: #f87171; cursor: pointer; background: rgba(248,113,113,0.08); border: none; font-size: 14px; padding: 6px 12px; border-radius: 4px; transition: 0.2s; margin-left: 8px; }
+    .todo-delete:hover { background: rgba(248,113,113,0.2); }
+    
+    .weather-result { padding: 10px; background: #0b1220; border-radius: 6px; text-align: center; margin-top: 8px; font-size: 14px; min-height: 60px; display: flex; flex-direction: column; justify-content: center; border: 1px solid rgba(148,163,184,0.1); }
   </style>
 </head>
 <body>
@@ -197,16 +213,24 @@
           <!-- Add LinkedIn/GitHub if available -->
         </div>
       </div>
-      <nav>
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#education">Education</a>
-        <a href="#certifications">Certifications</a>
-        <a href="#languages">Languages</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      <div style="margin-top: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+        <nav style="margin-top: 0;">
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#education">Education</a>
+          <a href="#certifications">Certifications</a>
+          <a href="#languages">Languages</a>
+          <a href="#interactive">Interactive Box</a>
+          <a href="#why-hire-me">Why Hire Me?</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <a class="btn" style="display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 14px rgba(56,189,248,.3);" href="../Martin jose CV.pdf" target="_blank" download="Martin_Jose_CV.pdf">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Download CV
+        </a>
+      </div>
     </header>
 
     <section id="about">
@@ -261,7 +285,11 @@
         <div class="item">
           <h3>Online Insurance Management (Python)</h3>
           <div class="meta">2022 • Policy & Claims Automation</div>
-          <p><strong>Python‑based platform</strong> to automate <strong>policy management</strong>, <strong>claims processing</strong>, and customer <strong>data handling</strong>; improved operational workflows for <strong>accuracy and reliability</strong>.</p>
+          <div style="font-size: 14.5px; color: var(--text); opacity: 0.95; margin-bottom: 12px; display: flex; flex-direction: column; gap: 6px;">
+            <div><strong style="color: var(--accent);">Problem:</strong> Manual, inefficient tracking of policies and claims caused delays and errors.</div>
+            <div><strong style="color: var(--accent);">Solution:</strong> Built a <strong>Python‑based platform</strong> to automate <strong>policy management</strong>, <strong>claims processing</strong>, and customer data handling.</div>
+            <div><strong style="color: var(--accent);">Result:</strong> Improved operational workflows for <strong>accuracy and reliability</strong>, reducing processing time.</div>
+          </div>
           <div class="tags">
             <span class="tag">Python</span><span class="tag">Workflows</span><span class="tag">Data handling</span>
           </div>
@@ -269,7 +297,11 @@
         <div class="item">
           <h3>Pharmacy Management System (Python)</h3>
           <div class="meta">2022 • Inventory & Sales</div>
-          <p>Application for <strong>inventory tracking</strong>, <strong>order processing</strong>, and <strong>sales documentation</strong>; increased <strong>efficiency</strong> in daily pharmacy operations.</p>
+          <div style="font-size: 14.5px; color: var(--text); opacity: 0.95; margin-bottom: 12px; display: flex; flex-direction: column; gap: 6px;">
+            <div><strong style="color: var(--accent);">Problem:</strong> Disorganized inventory logs and manual sales documentation led to ongoing stock issues.</div>
+            <div><strong style="color: var(--accent);">Solution:</strong> Developed an application for reliable <strong>inventory tracking</strong>, <strong>order processing</strong>, and sales documentation.</div>
+            <div><strong style="color: var(--accent);">Result:</strong> Significantly increased overall <strong>efficiency</strong> and management visibility in daily pharmacy operations.</div>
+          </div>
           <div class="tags">
             <span class="tag">Python</span><span class="tag">Inventory</span><span class="tag">Automation</span>
           </div>
@@ -277,7 +309,11 @@
         <div class="item">
           <h3>Online Resume Builder (.NET Framework)</h3>
           <div class="meta">2023 • Templates & Export</div>
-          <p><strong>Web app</strong> guiding users through <strong>structured resume creation</strong> with <strong>customizable templates</strong> and polished output.</p>
+          <div style="font-size: 14.5px; color: var(--text); opacity: 0.95; margin-bottom: 12px; display: flex; flex-direction: column; gap: 6px;">
+            <div><strong style="color: var(--accent);">Problem:</strong> Job seekers often struggle to build structured, modernly formatted resumes easily from scratch.</div>
+            <div><strong style="color: var(--accent);">Solution:</strong> Created a <strong>Web app</strong> guiding users through <strong>structured resume creation</strong> with <strong>customizable templates</strong>.</div>
+            <div><strong style="color: var(--accent);">Result:</strong> Provided a seamless UX, resulting in rapid, polished output ready to be shared with employers.</div>
+          </div>
           <div class="tags">
             <span class="tag">.NET</span><span class="tag">Web</span><span class="tag">UX</span>
           </div>
@@ -357,6 +393,86 @@
       </div>
     </section>
 
+    <section id="interactive">
+      <h2>Mini interactive Box</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
+        
+        <!-- Calculator -->
+        <div class="item">
+          <h3 style="margin-bottom: 4px; font-size: 15px; display: flex; align-items: center; gap: 6px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="14"/><line x1="16" y1="18" x2="16" y2="18"/><line x1="12" y1="14" x2="12" y2="14"/><line x1="12" y1="18" x2="12" y2="18"/><line x1="8" y1="14" x2="8" y2="14"/><line x1="8" y1="18" x2="8" y2="18"/></svg>
+            Calculator
+          </h3>
+          <div class="app-widget" style="padding-bottom: 6px;">
+            <input type="text" id="calcScreen" class="calc-screen" readOnly />
+            <div class="calc-grid" id="calcGrid">
+              <button class="calc-btn">7</button><button class="calc-btn">8</button><button class="calc-btn">9</button><button class="calc-btn">/</button>
+              <button class="calc-btn">4</button><button class="calc-btn">5</button><button class="calc-btn">6</button><button class="calc-btn">*</button>
+              <button class="calc-btn">1</button><button class="calc-btn">2</button><button class="calc-btn">3</button><button class="calc-btn">-</button>
+              <button class="calc-btn" style="color: #f87171;">C</button><button class="calc-btn">0</button><button class="calc-btn" style="background: rgba(56,189,248,.1); color: var(--accent);">=</button><button class="calc-btn">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- To-Do List -->
+        <div class="item">
+          <h3 style="margin-bottom: 4px; font-size: 15px; display: flex; align-items: center; gap: 6px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            To-Do List
+          </h3>
+          <div class="app-widget">
+            <div style="display: flex; gap: 6px;">
+              <input type="text" id="todoInput" class="todo-input" placeholder="Add a new task..." style="margin: 0;" />
+              <button id="addTodo" class="btn" style="padding: 0 12px; font-size: 13px;">Add</button>
+            </div>
+            <ul id="todoList" class="todo-list" style="margin-top: 10px;">
+              <li class="todo-item"><span>• Hire Martin Jose</span> <button class="todo-delete">✖</button></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Weather App -->
+        <div class="item">
+          <h3 style="margin-bottom: 4px; font-size: 15px; display: flex; align-items: center; gap: 6px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M17.5 19C19.9853 19 22 16.9853 22 14.5C22 12.1384 20.1868 10.2012 17.8687 10.0223C17.4729 6.64364 14.606 4 11.1613 4C7.72828 4 4.86985 6.63004 4.46237 9.99539C2.52927 10.1656 1 11.7825 1 13.75C1 15.8211 2.67893 17.5 4.75 17.5H6"/><path d="M11 11V21"/><path d="M14 17L11 20L8 17"/></svg>
+            Weather Explorer
+          </h3>
+          <div class="app-widget">
+            <div style="display: flex; gap: 6px;">
+              <input type="text" id="weatherCity" class="weather-input" placeholder="City (e.g. London)" style="margin: 0;" />
+              <button id="getWeather" class="btn" style="padding: 0 12px; font-size: 13px;">Fetch</button>
+            </div>
+            <div id="weatherResult" class="weather-result">
+              <span style="color: var(--muted)">Enter a city to get weather details.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="why-hire-me">
+      <h2>Why hire me?</h2>
+      <div class="grid">
+        <div class="item">
+          <h3>✔ Strong foundation in programming</h3>
+          <p>Proficient in multiple languages with a solid grasp of core computer science principles, enabling the delivery of clean, efficient, and robust code.</p>
+        </div>
+        <div class="item">
+          <h3>✔ Quick learner</h3>
+          <p>Highly adaptable and eager to master new technologies, frameworks, and methodologies. Able to quickly contribute to fast-paced environments.</p>
+        </div>
+        <div class="item">
+          <h3>✔ Passionate about building real-world solutions</h3>
+          <p>Driven by the desire to create scalable and user-centric applications that solve genuine problems and deliver tangible value.</p>
+        </div>
+        <div class="item">
+          <h3>✔ Team player with problem-solving mindset</h3>
+          <p>Collaborative and communicative. Skilled at navigating complex technical challenges by breaking them down and working together toward effective solutions.</p>
+        </div>
+      </div>
+    </section>
+
     <section id="contact">
       <h2>Contact</h2>
       <p>Email: <a href="mailto:martinjp4455@gmail.com">martinjp4455@gmail.com</a></p>
@@ -422,6 +538,87 @@
       }
       animateCursor();
     }
+
+    // --- Mini Interactive Apps Logic ---
+
+    // 1. Calculator Logic
+    const calcScreen = document.getElementById('calcScreen');
+    const calcBtns = document.querySelectorAll('.calc-btn');
+    calcBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const val = btn.innerText;
+        if(val === 'C') { calcScreen.value = ''; }
+        else if(val === '=') { 
+          try { 
+            // Warning: simple eval usage for small demo strictly constrained
+            calcScreen.value = eval(calcScreen.value) || ''; 
+          } catch(e) { calcScreen.value = 'Error'; }
+        }
+        else { calcScreen.value += val; }
+      });
+    });
+
+    // 2. To-Do List Logic
+    const todoInput = document.getElementById('todoInput');
+    const addTodoBtn = document.getElementById('addTodo');
+    const todoList = document.getElementById('todoList');
+    
+    function attachDeleteEvent(btn) {
+      btn.addEventListener('click', (e) => {
+        const li = e.target.closest('li');
+        if(li) li.remove();
+      });
+    }
+    // Attach to existing pre-filled task
+    document.querySelectorAll('.todo-delete').forEach(attachDeleteEvent);
+
+    function addTask() {
+      const taskText = todoInput.value.trim();
+      if(!taskText) return;
+      
+      const li = document.createElement('li');
+      li.className = 'todo-item';
+      li.innerHTML = `<span>• ${taskText}</span> <button class="todo-delete">✖</button>`;
+      attachDeleteEvent(li.querySelector('.todo-delete'));
+      todoList.appendChild(li);
+      todoInput.value = '';
+    }
+    addTodoBtn.addEventListener('click', addTask);
+    todoInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') addTask(); });
+
+    // 3. Weather App Logic (Open-Meteo)
+    const weatherCity = document.getElementById('weatherCity');
+    const getWeatherBtn = document.getElementById('getWeather');
+    const weatherResult = document.getElementById('weatherResult');
+
+    getWeatherBtn.addEventListener('click', async () => {
+      const city = weatherCity.value.trim();
+      if(!city) return;
+      weatherResult.innerHTML = '<span style="color:var(--muted)">Loading...</span>';
+      try {
+        const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1`);
+        const geoData = await geoRes.json();
+        if(!geoData.results || geoData.results.length === 0) {
+          weatherResult.innerHTML = '<span style="color:#f87171; font-weight:600;">Location not found!</span>';
+          return;
+        }
+        const { latitude, longitude, name, country } = geoData.results[0];
+        
+        const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`);
+        const weatherData = await weatherRes.json();
+        const cw = weatherData.current_weather;
+        
+        weatherResult.innerHTML = `
+          <strong style="color:var(--accent); font-size: 20px;">${cw.temperature}°C</strong>
+          <span style="font-weight:600;">${name}, ${country}</span>
+          <span style="color:var(--muted); font-size: 13px; margin-top:4px;">Wind: ${cw.windspeed} km/h</span>
+        `;
+      } catch(e) {
+        weatherResult.innerHTML = '<span style="color:#f87171; font-weight:600;">API failed to connect!</span>';
+      }
+    });
+    weatherCity.addEventListener('keypress', (e) => { if(e.key === 'Enter') getWeatherBtn.click(); });
+
   </script>
 </body>
 </html>
